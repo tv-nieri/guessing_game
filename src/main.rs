@@ -1,6 +1,7 @@
 // This is a guessing game program.
 // 2022-12-21
 use rand::Rng;
+use std::cmp::Ordering;
 use std::io;
 
 fn main() {
@@ -18,5 +19,13 @@ fn main() {
         .read_line(&mut guess)
         .expect("Failed to read line...");
 
+    let guess: u32 = guess.trim().parse().expect("Plase type a number!");
+
     println!("You guessed: {}", guess);
+
+    match guess.cmp(&secret_number) {
+        Ordering::Less => println!("Too low!!!"),
+        Ordering::Greater => println!("Too hight!!!"),
+        Ordering::Equal => println!("You win!!!"),
+    }
 }
